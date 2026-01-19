@@ -9,6 +9,7 @@ public class BirdScript : MonoBehaviour
     public LogicScript logic;
     public bool birdIsAlive = true;
 
+    // private objects
     float topOfScreen;
     float bottomOfScreen;
 
@@ -48,7 +49,9 @@ public class BirdScript : MonoBehaviour
     private void birdDied()
     {
         logic.gameOver();
+        logic.over = true;
         birdIsAlive = false;
+
     }
 
 }

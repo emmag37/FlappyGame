@@ -10,6 +10,8 @@ public class LogicScript : MonoBehaviour
     public Text scoreText;
     public GameObject gameOverScreen;
 
+    public bool over = false;
+
     [ContextMenu("Increase Score")]     // can now use while unity is running
     public void addScore(int scoreToAdd)
     {
