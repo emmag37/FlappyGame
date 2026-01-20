@@ -8,6 +8,8 @@ public class LogicScript : MonoBehaviour
 {
     public int playerScore = 0;
     public Text scoreText;
+    public Text highScoreText;
+
     public GameObject gameOverScreen;
     public GameObject startScreen;
     public AudioSource dingSFX;
@@ -17,6 +19,9 @@ public class LogicScript : MonoBehaviour
 
     void Start()
     {
+        // set the high score text (every time the game is run)
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("HighScore").ToString();
+
         if (skipStart)
         {
             Time.timeScale = 1f;
@@ -42,9 +47,18 @@ public class LogicScript : MonoBehaviour
     [ContextMenu("Increase Score")]     // can now use while unity is running
     public void addScore(int scoreToAdd)
     {
+        // update the current game score
         playerScore = playerScore + scoreToAdd;
-        scoreText.text = playerScore.ToString();
+        scoreText.text = "Score: " + playerScore.ToString();
         dingSFX.Play();
+
+        // update the high score
+        if (playerScore > PlayerPrefs.GetInt("HighScore"))
+        {
+            highScoreText.text = "High Score: " + playerScore.ToString();
+
+            PlayerPrefs.SetInt("HighScore", playerScore);
+        }
     }
 
     public void restartGame()
